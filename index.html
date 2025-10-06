@@ -1,11 +1,326 @@
-<body> <!-- زر فتح السلة --> 
-  <button 
-  onclick="openCart()">فتح 
-  السلة</button> <!-- السلة --> 
-  <div id="cart">
-    <p>هذه السلة</p> <button 
-    onclick="closeCart()">إغلاق</button>
-  </div> <script 
-  src="Script.js"></script>
-</body>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجري الإلكتروني</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
 
+        body {
+            background-color: #f5f5f5;
+        }
+
+        /* الهيدر */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #3498db;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* المحتوى الرئيسي */
+        main {
+            margin-top: 80px;
+            padding: 2rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background-color: #ddd;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+
+        .product-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            color: #e74c3c;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: #2980b9;
+        }
+
+        /* سلة التسوق */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            transition: right 0.3s;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-items {
+            margin: 2rem 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .checkout-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">متجري الإلكتروني</div>
+            <ul class="nav-links">
+                <li><a href="#">الرئيسية</a></li>
+                <li><a href="#">المنتجات</a></li>
+                <li><a href="#">عنا</a></li>
+                <li><a href="#">اتصل بنا</a></li>
+            </ul>
+            <div class="cart-icon" onclick="toggleCart()">
+                🛒
+                <span class="cart-count">0</span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main>
+        <h1>منتجاتنا</h1>
+        <div class="products-grid" id="productsGrid">
+            <!-- المنتجات سيتم إضافتها بواسطة JavaScript -->
+        </div>
+    </main>
+
+    <!-- سلة التسوق -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <h2>سلة التسوق</h2>
+        <div class="cart-items" id="cartItems">
+            <!-- عناصر السلة ستضاف هنا -->
+        </div>
+        <div class="cart-total">
+            <strong>المجموع: <span id="totalPrice">0</span> ريال</strong>
+        </div>
+        <button class="checkout-btn" onclick="checkout()">إتمام الشراء</button>
+    </div>
+
+    <script>
+        // بيانات المنتجات
+        const products = [
+            { id: 1, name: "لابتوب غيمنغ", price: 4500, image: "💻" },
+            { id: 2, name: "هاتف ذكي", price: 3200, image: "📱" },
+            { id: 3, name: "سماعات لاسلكية", price: 600, image: "🎧" },
+            { id: 4, name: "ساعة ذكية", price: 900, image: "⌚" },
+            { id: 5, name: "كاميرا رقمية", price: 2800, image: "📷" },
+            { id: 6, name: "لوح رسم", price: 1200, image: "✏️" }
+        ];
+
+        let cart = [];
+        let totalPrice = 0;
+
+        // عرض المنتجات
+        function displayProducts() {
+            const productsGrid = document.getElementById('productsGrid');
+            productsGrid.innerHTML = '';
+
+            products.forEach(product => {
+                const productCard = `
+                    <div class="product-card">
+                        <div class="product-image">${product.image}</div>
+                        <div class="product-title">${product.name}</div>
+                        <div class="product-price">${product.price} ريال</div>
+                        <button class="add-to-cart" onclick="addToCart(${product.id})">
+                            إضافة إلى السلة
+                        </button>
+                    </div>
+                `;
+                productsGrid.innerHTML += productCard;
+            });
+        }
+
+        // إضافة منتج إلى السلة
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCart();
+            alert(`تم إضافة ${product.name} إلى السلة!`);
+        }
+
+        // تحديث السلة
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartCount = document.querySelector('.cart-count');
+            const totalPriceElement = document.getElementById('totalPrice');
+
+            cartItems.innerHTML = '';
+            totalPrice = 0;
+
+            cart.forEach(item => {
+                totalPrice += item.price * item.quantity;
+                const cartItem = `
+                    <div class="cart-item">
+                        <div>${item.name}</div>
+                        <div>${item.price} ريال × ${item.quantity}</div>
+                    </div>
+                `;
+                cartItems.innerHTML += cartItem;
+            });
+
+            cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+            totalPriceElement.textContent = totalPrice;
+        }
+
+        // عرض/إخفاء السلة
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('active');
+        }
+
+        // إتمام الشراء
+        function checkout() {
+            if (cart.length === 0) {
+                alert('السلة فارغة!');
+                return;
+            }
+
+            alert(`تم إتمام الشراء بنجاح! المجموع: ${totalPrice} ريال\nشكراً لشرائك من متجرنا!`);
+            cart = [];
+            updateCart();
+            toggleCart();
+        }
+
+        // تهيئة الصفحة
+        displayProducts();
+    </script>
+</body>
+</html>
