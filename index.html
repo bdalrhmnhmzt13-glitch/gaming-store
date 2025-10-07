@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجري الإلكتروني</title>
+    <title>Top للشحن - متجر العملات والبطاقات</title>
     <style>
         * {
             margin: 0;
@@ -11,316 +11,1027 @@
             box-sizing: border-box;
             font-family: 'Arial', sans-serif;
         }
-
+        
         body {
-            background-color: #f5f5f5;
+            background: #f5f5f5;
+            padding: 15px;
         }
-
-        /* الهيدر */
-        header {
-            background-color: #2c3e50;
+        
+        .header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
             color: white;
-            padding: 1rem 2rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
+            padding: 20px;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        
+        .store-name {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
+        
+        .whatsapp-contact {
+            background: #25D366;
             color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin: 8px auto;
+            display: inline-block;
             text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #3498db;
-        }
-
-        .cart-icon {
-            position: relative;
-            cursor: pointer;
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #e74c3c;
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            font-size: 0.8rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* المحتوى الرئيسي */
-        main {
-            margin-top: 80px;
-            padding: 2rem;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 10px;
-            padding: 1rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 200px;
-            background-color: #ddd;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-        }
-
-        .product-title {
             font-weight: bold;
-            margin-bottom: 0.5rem;
+            font-size: 14px;
         }
-
-        .product-price {
-            color: #e74c3c;
-            font-weight: bold;
-            margin-bottom: 1rem;
+        
+        .categories {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
-
-        .add-to-cart {
-            background-color: #3498db;
+        
+        .category-btn {
+            background: #34495e;
             color: white;
             border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
+            padding: 8px 16px;
+            border-radius: 20px;
             cursor: pointer;
-            width: 100%;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            font-size: 13px;
         }
-
-        .add-to-cart:hover {
-            background-color: #2980b9;
+        
+        .category-btn.active {
+            background: #ff6b6b;
         }
-
-        /* سلة التسوق */
+        
+        .category-btn:hover {
+            background: #2c3e50;
+        }
+        
+        .cart-button {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+        
+        .cart-button:hover {
+            transform: scale(1.1);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #2c3e50;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 11px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
         .cart-sidebar {
             position: fixed;
             top: 0;
-            right: -400px;
-            width: 400px;
+            left: -350px;
+            width: 300px;
             height: 100vh;
             background: white;
-            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-            transition: right 0.3s;
-            padding: 2rem;
+            box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+            transition: left 0.3s ease;
+            z-index: 999;
+            padding: 15px;
             overflow-y: auto;
         }
-
+        
         .cart-sidebar.active {
-            right: 0;
+            left: 0;
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: #ff6b6b;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            z-index: 998;
+        }
+        
+        .overlay.active {
+            display: block;
         }
 
-        .cart-items {
-            margin: 2rem 0;
+        /* أنماط المنتجات - مصغرة */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .product {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+        }
+        
+        .product-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #ff6b6b;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+        
+        .product-price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 8px 0;
+        }
+        
+        .product-description {
+            color: #7f8c8d;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            font-size: 12px;
+            height: 34px;
+            overflow: hidden;
+        }
+        
+        .buy-now-btn {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        .buy-now-btn:hover {
+            background: linear-gradient(135deg, #128C7E 0%, #075E54 100%);
+            transform: translateY(-2px);
         }
 
         .cart-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
-            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 13px;
+        }
+
+        .cart-total {
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            margin: 15px 0;
+            color: #2c3e50;
         }
 
         .checkout-btn {
-            background-color: #27ae60;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
             color: white;
             border: none;
-            padding: 1rem 2rem;
-            border-radius: 5px;
+            padding: 12px;
+            border-radius: 6px;
             cursor: pointer;
             width: 100%;
-            font-size: 1.1rem;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background: linear-gradient(135deg, #128C7E 0%, #075E54 100%);
+            transform: translateY(-2px);
+        }
+
+        .remove-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            background: #ee5a24;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 25px 0 20px;
+            color: #2c3e50;
+            font-size: 22px;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            margin: 8px auto;
+            border-radius: 2px;
+        }
+
+        .payment-info {
+            background: #e8f4fc;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+            border-right: 3px solid #25D366;
+            font-size: 13px;
         }
 
         @media (max-width: 768px) {
-            .cart-sidebar {
-                width: 100%;
-                right: -100%;
+            .products {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             }
             
-            .nav-links {
-                display: none;
+            .categories {
+                justify-content: center;
+            }
+            
+            .store-name {
+                font-size: 1.7rem;
+            }
+            
+            .product {
+                height: 200px;
+                padding: 12px;
+            }
+            
+            .product-image {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .products {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            }
+            
+            .product {
+                height: 190px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- الهيدر -->
-    <header>
-        <nav class="navbar">
-            <div class="logo">متجري الإلكتروني</div>
-            <ul class="nav-links">
-                <li><a href="#">الرئيسية</a></li>
-                <li><a href="#">المنتجات</a></li>
-                <li><a href="#">عنا</a></li>
-                <li><a href="#">اتصل بنا</a></li>
-            </ul>
-            <div class="cart-icon" onclick="toggleCart()">
-                🛒
-                <span class="cart-count">0</span>
-            </div>
-        </nav>
-    </header>
+    <!-- زر سلة التسوق -->
+    <button class="cart-button" onclick="openCart()">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
 
-    <!-- المحتوى الرئيسي -->
-    <main>
-        <h1>منتجاتنا</h1>
-        <div class="products-grid" id="productsGrid">
-            <!-- المنتجات سيتم إضافتها بواسطة JavaScript -->
-        </div>
-    </main>
+    <!-- الرأس -->
+    <div class="header">
+        <h1 class="store-name">Top للشحن</h1>
+        <p>أفضل العروض على العملات والبطاقات - شحن فوري</p>
+        <a href="https://wa.me/963964659342" class="whatsapp-contact" target="_blank">
+            📞 للتواصل: 963964659342
+        </a>
+    </div>
 
-    <!-- سلة التسوق -->
+    <!-- معلومات الدفع -->
+    <div class="payment-info">
+        <h3>💳 طريقة الدفع</h3>
+        <p>الدفع عبر سيرياتيل كاش على الرقم: <strong>963995606528</strong></p>
+        <p>بعد الدفع، سيتم الشحن فوراً إلى حسابك</p>
+    </div>
+
+    <!-- الأقسام -->
+    <div class="categories">
+        <button class="category-btn active" onclick="filterCategory('all')">جميع المنتجات</button>
+        <button class="category-btn" onclick="filterCategory('social')">التطبيقات</button>
+        <button class="category-btn" onclick="filterCategory('battle')">ألعاب المعارك</button>
+        <button class="category-btn" onclick="filterCategory('strategy')">ألعاب الاستراتيجية</button>
+        <button class="category-btn" onclick="filterCategory('sports')">ألعاب الرياضة</button>
+        <button class="category-btn" onclick="filterCategory('casual')">ألعاب Casual</button>
+    </div>
+
+    <!-- قسم المنتجات -->
+    <h2 class="section-title">🛍️ جميع المنتجات</h2>
+    
+    <!-- المنتجات -->
+    <div class="products" id="productsContainer">
+        <!-- المنتجات ستضاف هنا عن طريق JavaScript -->
+    </div>
+
+    <!-- سلة التسوق الجانبية -->
+    <div class="overlay" id="overlay" onclick="closeCart()"></div>
     <div class="cart-sidebar" id="cartSidebar">
-        <h2>سلة التسوق</h2>
+        <div class="cart-header">
+            <h2>🛒 سلة التسوق</h2>
+            <button class="close-cart" onclick="closeCart()">×</button>
+        </div>
+        
         <div class="cart-items" id="cartItems">
-            <!-- عناصر السلة ستضاف هنا -->
+            <p style="text-align: center; color: #7f8c8d;" id="emptyCartMessage">السلة فارغة</p>
         </div>
-        <div class="cart-total">
-            <strong>المجموع: <span id="totalPrice">0</span> ريال</strong>
+        
+        <div class="cart-total" id="cartTotal">
+            الإجمالي: 0 ل.س
         </div>
-        <button class="checkout-btn" onclick="checkout()">إتمام الشراء</button>
+        
+        <button class="checkout-btn" onclick="sendToWhatsApp()">📤 إرسال الطلب عبر واتساب</button>
     </div>
 
     <script>
-        // بيانات المنتجات
+        // بيانات منتجات المتجر - جميع المنتجات بدون تكرار
         const products = [
-            { id: 1, name: "لابتوب غيمنغ", price: 4500, image: "💻" },
-            { id: 2, name: "هاتف ذكي", price: 3200, image: "📱" },
-            { id: 3, name: "سماعات لاسلكية", price: 600, image: "🎧" },
-            { id: 4, name: "ساعة ذكية", price: 900, image: "⌚" },
-            { id: 5, name: "كاميرا رقمية", price: 2800, image: "📷" },
-            { id: 6, name: "لوح رسم", price: 1200, image: "✏️" }
+            // التطبيقات الاجتماعية
+            {
+                id: 501,
+                name: "Soul Chill",
+                price: 15000,
+                category: "social",
+                color: "#9b59b6",
+                badge: "جديد",
+                description: "عملات وعناصر Soul Chill",
+                icon: "🎵"
+            },
+            {
+                id: 502,
+                name: "Bigo Live",
+                price: 12000,
+                category: "social",
+                color: "#e74c3c",
+                badge: "شائع",
+                description: "عملات وعناصر Bigo Live",
+                icon: "📹"
+            },
+            {
+                id: 503,
+                name: "Poppo Live",
+                price: 13000,
+                category: "social",
+                color: "#3498db",
+                badge: "مميز",
+                description: "عملات وعناصر Poppo Live",
+                icon: "🎥"
+            },
+            {
+                id: 504,
+                name: "YoHo",
+                price: 11000,
+                category: "social",
+                color: "#2ecc71",
+                badge: "جديد",
+                description: "عملات وعناصر YoHo",
+                icon: "💬"
+            },
+            {
+                id: 505,
+                name: "Ahlan Chat",
+                price: 10000,
+                category: "social",
+                color: "#f39c12",
+                badge: "شائع",
+                description: "عملات وعناصر Ahlan Chat",
+                icon: "👋"
+            },
+            {
+                id: 506,
+                name: "Yoho Waka",
+                price: 14000,
+                category: "social",
+                color: "#1abc9c",
+                badge: "مميز",
+                description: "عملات وعناصر Yoho Waka",
+                icon: "🗣️"
+            },
+            {
+                id: 507,
+                name: "Aman Chat",
+                price: 9000,
+                category: "social",
+                color: "#d35400",
+                badge: "جديد",
+                description: "عملات وعناصر Aman Chat",
+                icon: "🛡️"
+            },
+            {
+                id: 508,
+                name: "Oohla Chat",
+                price: 9500,
+                category: "social",
+                color: "#8e44ad",
+                badge: "شائع",
+                description: "عملات وعناصر Oohla Chat",
+                icon: "💭"
+            },
+            {
+                id: 509,
+                name: "Xena Live",
+                price: 16000,
+                category: "social",
+                color: "#c0392b",
+                badge: "مميز",
+                description: "عملات وعناصر Xena Live",
+                icon: "🌟"
+            },
+            {
+                id: 510,
+                name: "Tik Tok",
+                price: 18000,
+                category: "social",
+                color: "#00acee",
+                badge: "شهير",
+                description: "عملات وعناصر Tik Tok",
+                icon: "🎵"
+            },
+            {
+                id: 511,
+                name: "Mashaat",
+                price: 8500,
+                category: "social",
+                color: "#27ae60",
+                badge: "جديد",
+                description: "عملات وعناصر Mashaat",
+                icon: "💃"
+            },
+            {
+                id: 512,
+                name: "Hiya Chat",
+                price: 10500,
+                category: "social",
+                color: "#e67e22",
+                badge: "شائع",
+                description: "عملات وعناصر Hiya Chat",
+                icon: "👋"
+            },
+            {
+                id: 513,
+                name: "Yoo Chat",
+                price: 11500,
+                category: "social",
+                color: "#2980b9",
+                badge: "مميز",
+                description: "عملات وعناصر Yoo Chat",
+                icon: "💬"
+            },
+            {
+                id: 514,
+                name: "Cocco Live",
+                price: 12500,
+                category: "social",
+                color: "#16a085",
+                badge: "جديد",
+                description: "عملات وعناصر Cocco Live",
+                icon: "🎤"
+            },
+            {
+                id: 515,
+                name: "Olamet",
+                price: 17000,
+                category: "social",
+                color: "#8e44ad",
+                badge: "شائع",
+                description: "عملات وعناصر Olamet",
+                icon: "🎭"
+            },
+
+            // ألعاب المعارك
+            {
+                id: 101,
+                name: "Blood Strike",
+                price: 10000,
+                category: "battle",
+                color: "#e74c3c",
+                badge: "جديد",
+                description: "عملات وعناصر Blood Strike",
+                icon: "🔫"
+            },
+            {
+                id: 102,
+                name: "Genshin Impact", 
+                price: 15000,
+                category: "battle",
+                color: "#3498db",
+                badge: "شائع",
+                description: "كريستالات Genshin Impact",
+                icon: "⚔️"
+            },
+            {
+                id: 103,
+                name: "Delta Force",
+                price: 12000,
+                category: "battle",
+                color: "#2ecc71",
+                badge: "حصري",
+                description: "عملات وعناصر Delta Force",
+                icon: "🎯"
+            },
+            {
+                id: 104,
+                name: "Farlight 84",
+                price: 13000,
+                category: "battle",
+                color: "#9b59b6",
+                badge: "مميز",
+                description: "عملات وعناصر Farlight 84",
+                icon: "🔦"
+            },
+            {
+                id: 105,
+                name: "Arena Breakout",
+                price: 14000,
+                category: "battle",
+                color: "#1abc9c",
+                badge: "جديد",
+                description: "عملات وعناصر Arena Breakout",
+                icon: "🏟️"
+            },
+            {
+                id: 106,
+                name: "Fortnite",
+                price: 18000,
+                category: "battle",
+                color: "#e67e22",
+                badge: "شهير",
+                description: "V-Bucks وعناصر Fortnite",
+                icon: "🌎"
+            },
+            {
+                id: 107,
+                name: "Honor of Kings",
+                price: 11000,
+                category: "battle",
+                color: "#e74c3c",
+                badge: "شائع",
+                description: "عملات وعناصر Honor of Kings",
+                icon: "👑"
+            },
+
+            // ألعاب الاستراتيجية
+            {
+                id: 201,
+                name: "انتقام السلاطين",
+                price: 20000,
+                category: "strategy",
+                color: "#d35400",
+                badge: "مميز",
+                description: "عملات انتقام السلاطين",
+                icon: "⚔️"
+            },
+            {
+                id: 202,
+                name: "AVALON",
+                price: 17000,
+                category: "strategy",
+                color: "#3498db",
+                badge: "جديد",
+                description: "عملات ومستلزمات AVALON",
+                icon: "🏰"
+            },
+            {
+                id: 203,
+                name: "King of Avalon",
+                price: 19000,
+                category: "strategy",
+                color: "#2ecc71",
+                badge: "شائع",
+                description: "عملات King of Avalon",
+                icon: "👑"
+            },
+            {
+                id: 204,
+                name: "دمج الممالك",
+                price: 16000,
+                category: "strategy",
+                color: "#9b59b6",
+                badge: "حصري",
+                description: "عملات دمج الممالك",
+                icon: "🧩"
+            },
+            {
+                id: 205,
+                name: "حرب الممالك",
+                price: 18000,
+                category: "strategy",
+                color: "#1abc9c",
+                badge: "مميز",
+                description: "عملات حرب الممالك",
+                icon: "⚔️"
+            },
+            {
+                id: 206,
+                name: "Lords Mobile",
+                price: 22000,
+                category: "strategy",
+                color: "#e67e22",
+                badge: "شهير",
+                description: "عملات Lords Mobile",
+                icon: "🏰"
+            },
+
+            // ألعاب الرياضة
+            {
+                id: 301,
+                name: "FC Mobile",
+                price: 15000,
+                category: "sports",
+                color: "#27ae60",
+                badge: "شائع",
+                description: "عملات FC Mobile",
+                icon: "⚽"
+            },
+            {
+                id: 302,
+                name: "eFootball",
+                price: 14000,
+                category: "sports",
+                color: "#2980b9",
+                badge: "جديد",
+                description: "عملات eFootball",
+                icon: "🎮"
+            },
+            {
+                id: 303,
+                name: "8 Ball Pool",
+                price: 12000,
+                category: "sports",
+                color: "#8e44ad",
+                badge: "مميز",
+                description: "عملات 8 Ball Pool",
+                icon: "🎱"
+            },
+
+            // ألعاب Casual
+            {
+                id: 401,
+                name: "Ludo Club",
+                price: 8000,
+                category: "casual",
+                color: "#f39c12",
+                badge: "شائع",
+                description: "عملات Ludo Club",
+                icon: "🎲"
+            },
+            {
+                id: 402,
+                name: "Yalla Ludo",
+                price: 9000,
+                category: "casual",
+                color: "#e74c3c",
+                badge: "مميز",
+                description: "عملات Yalla Ludo",
+                icon: "🎯"
+            },
+            {
+                id: 403,
+                name: "جواكر",
+                price: 7000,
+                category: "casual",
+                color: "#3498db",
+                badge: "جديد",
+                description: "عملات جواكر",
+                icon: "🃏"
+            },
+            {
+                id: 404,
+                name: "Roblox",
+                price: 13000,
+                category: "casual",
+                color: "#2ecc71",
+                badge: "شهير",
+                description: "Robux وعناصر Roblox",
+                icon: "🧩"
+            },
+
+            // المنتجات الأصلية (ببجي وفري فاير)
+            {
+                id: 601,
+                name: "ببجي - 60 شدة",
+                price: 10000,
+                category: "battle",
+                color: "#ff6b6b",
+                badge: "شائع",
+                description: "60 شدة للعبة ببجي",
+                icon: "🎯"
+            },
+            {
+                id: 602,
+                name: "فري فاير - 110 جوهرة", 
+                price: 12000,
+                category: "battle",
+                color: "#4ecdc4",
+                badge: "جديد",
+                description: "110 جوهرة للعبة فري فاير",
+                icon: "💎"
+            },
+            {
+                id: 603,
+                name: "ببجي - 325 شدة",
+                price: 50000,
+                category: "battle",
+                color: "#e74c3c",
+                badge: "الأفضل",
+                description: "325 شدة للعبة ببجي",
+                icon: "🎯"
+            },
+            {
+                id: 604,
+                name: "فري فاير - 520 جوهرة",
+                price: 55000,
+                category: "battle",
+                color: "#3498db",
+                badge: "مميز",
+                description: "520 جوهرة للعبة فري فاير",
+                icon: "💎"
+            },
+            {
+                id: 605,
+                name: "ببجي - 1200 شدة",
+                price: 180000,
+                category: "battle",
+                color: "#9b59b6",
+                badge: "كمية كبيرة",
+                description: "1200 شدة للعبة ببجي",
+                icon: "🎯"
+            },
+            {
+                id: 606,
+                name: "فري فاير - 1060 جوهرة",
+                price: 100000,
+                category: "battle",
+                color: "#2ecc71",
+                badge: "عرض خاص",
+                description: "1060 جوهرة للعبة فري فاير",
+                icon: "💎"
+            }
         ];
 
+        // متغيرات السلة
         let cart = [];
-        let totalPrice = 0;
+        let total = 0;
+        let currentCategory = 'all';
 
         // عرض المنتجات
         function displayProducts() {
-            const productsGrid = document.getElementById('productsGrid');
-            productsGrid.innerHTML = '';
+            const productsContainer = document.getElementById('productsContainer');
+            productsContainer.innerHTML = '';
 
-            products.forEach(product => {
-                const productCard = `
-                    <div class="product-card">
-                        <div class="product-image">${product.image}</div>
-                        <div class="product-title">${product.name}</div>
-                        <div class="product-price">${product.price} ريال</div>
-                        <button class="add-to-cart" onclick="addToCart(${product.id})">
-                            إضافة إلى السلة
-                        </button>
+            const filteredProducts = currentCategory === 'all' 
+                ? products 
+                : products.filter(product => product.category === currentCategory);
+
+            filteredProducts.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.className = 'product';
+                productElement.innerHTML = `
+                    ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                    <div class="product-image" style="background: ${product.color};">
+                        ${product.icon}
                     </div>
+                    <h3 style="font-size: 14px; margin-bottom: 5px;">${product.name}</h3>
+                    <p class="product-description">${product.description}</p>
+                    <div class="product-price">${product.price.toLocaleString()} ل.س</div>
+                    <button class="buy-now-btn" onclick="addToCart(${product.id})">🛒 شراء</button>
                 `;
-                productsGrid.innerHTML += productCard;
+                productsContainer.appendChild(productElement);
             });
+        }
+
+        // تصفية حسب القسم
+        function filterCategory(category) {
+            currentCategory = category;
+            
+            // تحديد الأزرار النشطة
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            displayProducts();
+        }
+
+        // فتح سلة التسوق
+        function openCart() {
+            document.getElementById('cartSidebar').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+        }
+
+        // إغلاق سلة التسوق
+        function closeCart() {
+            document.getElementById('cartSidebar').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
         }
 
         // إضافة منتج إلى السلة
         function addToCart(productId) {
             const product = products.find(p => p.id === productId);
-            const existingItem = cart.find(item => item.id === productId);
+            
+            if (!product) return;
 
-            if (existingItem) {
-                existingItem.quantity++;
+            // البحث إذا كان المنتج موجود مسبقاً
+            const existingProduct = cart.find(item => item.id === productId);
+            
+            if (existingProduct) {
+                existingProduct.quantity += 1;
             } else {
-                cart.push({ ...product, quantity: 1 });
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    quantity: 1
+                });
             }
-
+            
+            // تحديث السلة
             updateCart();
-            alert(`تم إضافة ${product.name} إلى السلة!`);
+            
+            // فتح السلة تلقائياً
+            openCart();
+            
+            // تأثير مرئي
+            const cartBtn = document.querySelector('.cart-button');
+            cartBtn.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                cartBtn.style.transform = 'scale(1)';
+            }, 300);
         }
 
-        // تحديث السلة
+        // تحديث عرض السلة
         function updateCart() {
             const cartItems = document.getElementById('cartItems');
-            const cartCount = document.querySelector('.cart-count');
-            const totalPriceElement = document.getElementById('totalPrice');
-
-            cartItems.innerHTML = '';
-            totalPrice = 0;
-
+            const cartCount = document.getElementById('cartCount');
+            const cartTotal = document.getElementById('cartTotal');
+            const emptyCartMessage = document.getElementById('emptyCartMessage');
+            
+            // إعادة حساب الإجمالي
+            total = 0;
             cart.forEach(item => {
-                totalPrice += item.price * item.quantity;
-                const cartItem = `
-                    <div class="cart-item">
-                        <div>${item.name}</div>
-                        <div>${item.price} ريال × ${item.quantity}</div>
-                    </div>
-                `;
-                cartItems.innerHTML += cartItem;
+                total += item.price * item.quantity;
             });
-
-            cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
-            totalPriceElement.textContent = totalPrice;
-        }
-
-        // عرض/إخفاء السلة
-        function toggleCart() {
-            document.getElementById('cartSidebar').classList.toggle('active');
-        }
-
-        // إتمام الشراء
-        function checkout() {
+            
+            // تحديث العداد
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            
+            // تحديث الإجمالي
+            cartTotal.textContent = `الإجمالي: ${total.toLocaleString()} ل.س`;
+            
+            // تحديث قائمة العناصر
             if (cart.length === 0) {
-                alert('السلة فارغة!');
+                emptyCartMessage.style.display = 'block';
+                cartItems.innerHTML = '<p style="text-align: center; color: #7f8c8d;" id="emptyCartMessage">السلة فارغة</p>';
+            } else {
+                emptyCartMessage.style.display = 'none';
+                
+                let itemsHTML = '';
+                cart.forEach((item, index) => {
+                    itemsHTML += `
+                        <div class="cart-item">
+                            <div>
+                                <strong>${item.name}</strong>
+                                <br>
+                                <small>${item.price.toLocaleString()} ل.س × ${item.quantity}</small>
+                            </div>
+                            <div>
+                                <strong>${(item.price * item.quantity).toLocaleString()} ل.س</strong>
+                                <br>
+                                <button class="remove-btn" onclick="removeFromCart(${index})">🗑️ إزالة</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                cartItems.innerHTML = itemsHTML;
+            }
+        }
+
+        // إزالة منتج من السلة
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        // إرسال الطلب عبر واتساب
+        function sendToWhatsApp() {
+            if (cart.length === 0) {
+                alert('🛒 السلة فارغة! أضف بعض المنتجات أولاً.');
                 return;
             }
-
-            alert(`تم إتمام الشراء بنجاح! المجموع: ${totalPrice} ريال\nشكراً لشرائك من متجرنا!`);
+            
+            // بناء رسالة الطلب
+            let message = "مرحباً، أريد شراء المنتجات التالية من Top للشحن:\n\n";
+            
+            cart.forEach(item => {
+                message += `- ${item.name} (${item.quantity}×) = ${(item.price * item.quantity).toLocaleString()} ل.س\n`;
+            });
+            
+            message += `\nالمجموع: ${total.toLocaleString()} ل.س\n`;
+            message += "\nلقد قمت بالدفع عبر سيرياتيل كاش إلى الرقم 963995606528\n";
+            message += "الرجاء التأكيد والشحن فوراً.";
+            
+            // ترميز الرسالة للرابط
+            const encodedMessage = encodeURIComponent(message);
+            
+            // رقم واتساب المتجر
+            const whatsappNumber = "963964659342";
+            
+            // إنشاء رابط واتساب
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+            
+            // فتح واتساب في نافذة جديدة
+            window.open(whatsappURL, '_blank');
+            
+            // تفريغ السلة بعد الإرسال
             cart = [];
             updateCart();
-            toggleCart();
+            closeCart();
         }
 
-        // تهيئة الصفحة
-        displayProducts();
+        // التهيئة الأولية
+        document.addEventListener('DOMContentLoaded', function() {
+            displayProducts();
+            updateCart();
+            console.log('🏪 متجر Top للشحن جاهز!');
+        });
     </script>
 </body>
 </html>
